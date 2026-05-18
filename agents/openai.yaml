@@ -1,0 +1,6 @@
+interface:
+  display_name: "Short Video IP Leadgen"
+  short_description: "分析短视频和商业博主风格，保存记忆，并生成原创私域商业 IP 口播脚本"
+  default_prompt: "Use $short-video-ip-leadgen to analyze my short-video material, save or enable creator memory, and generate an original commercial IP口播 script."
+policy:
+  allow_implicit_invocation: true
