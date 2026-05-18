@@ -1,7 +1,7 @@
 <h1 align="center">short-video-ip-leadgen</h1>
 
 <p align="center">
-  <strong>短视频商业 IP 分析与私域引流原创脚本 Skill</strong>
+  <strong>短视频商业 IP 分析与私域IP原创脚本 Skill</strong>
 </p>
 
 <p align="center">
@@ -32,7 +32,7 @@
 
 `short-video-ip-leadgen` 是一个给 Codex / Claude 使用的短视频商业 IP 分析 Skill。
 
-它用于分析用户提供的抖音、小红书和短视频材料，学习商业博主的视频风格，保存独立记忆，并基于这些记忆生成原创的私域商业 IP 口播脚本。
+它用于分析用户提供的抖音、小红书和短视频材料，学习商业博主的视频风格，保存独立记忆，并基于这些记忆生成原创的商业 IP 口播脚本。
 
 这是一个 **Skill 包**，安装后由 Codex / Claude 直接调用。
 
