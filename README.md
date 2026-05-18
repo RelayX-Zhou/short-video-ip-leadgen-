@@ -1,4 +1,34 @@
-# short-video-ip-leadgen
+<h1 align="center">short-video-ip-leadgen</h1>
+
+<p align="center">
+  <strong>短视频商业 IP 分析与私域引流原创脚本 Skill</strong>
+</p>
+
+<p align="center">
+  <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg">
+  <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-111827.svg">
+  <img alt="Claude Skill" src="https://img.shields.io/badge/Claude-Skill-6B46C1.svg">
+  <img alt="Douyin" src="https://img.shields.io/badge/Douyin-Analysis-black.svg">
+  <img alt="Xiaohongshu" src="https://img.shields.io/badge/Xiaohongshu-Analysis-ff2442.svg">
+  <img alt="Private Domain IP" src="https://img.shields.io/badge/Private%20Domain-IP%20Leadgen-blue.svg">
+  <img alt="Original Scripts" src="https://img.shields.io/badge/Output-Original%20Scripts-orange.svg">
+</p>
+
+<p align="center">
+  <code>Codex Skill</code>
+  ·
+  <code>Claude Skill</code>
+  ·
+  <code>短视频分析</code>
+  ·
+  <code>商业 IP</code>
+  ·
+  <code>私域引流</code>
+  ·
+  <code>原创口播脚本</code>
+  ·
+  <code>合规创作</code>
+</p>
 
 `short-video-ip-leadgen` 是一个给 Codex / Claude 使用的短视频商业 IP 分析 Skill。
 
@@ -20,6 +50,7 @@ short-video-ip-leadgen/
 ├── memory/
 │   └── .gitkeep
 ├── README.md
+├── LICENSE
 └── .gitignore
 ```
 
@@ -110,6 +141,20 @@ C:\Users\33162\.codex\skills\short-video-ip-leadgen\SKILL.md
 输出：完整抖音发布脚本，包含标题、封面文案、口播脚本、拍摄提示
 ```
 
+### 只有链接时
+
+```text
+使用 $short-video-ip-leadgen
+
+这是抖音链接：https://v.douyin.com/xxxx/
+帮我分析并生成原创脚本
+```
+
+Skill 应提醒：
+
+```text
+我可以识别平台和链接类型，但不会从抖音/小红书链接下载或抓取视频。请补充字幕、截图、转写文本，或提供你有权处理的本地视频文件。
+```
 
 ## 视频抽帧
 
@@ -230,6 +275,36 @@ memory/商业博主B.json
 拍摄提示：
 ```
 
+## 发布到 GitHub
+
+上传整个仓库即可。最小可用文件是：
+
+```text
+SKILL.md
+agents/openai.yaml
+scripts/prepare_video_for_agent.py
+references/output_templates.md
+memory/.gitkeep
+README.md
+LICENSE
+.gitignore
+```
+
+不要上传运行时记忆文件：
+
+```text
+memory/*.json
+```
+
+不要上传抽帧输出：
+
+```text
+*_codex_frames/
+```
+
+## 开源协议
+
+本项目使用 MIT License 开源。你可以自由使用、修改和分发，但需要保留许可证声明。
 
 ## 典型工作流
 
