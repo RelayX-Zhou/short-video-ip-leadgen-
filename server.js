@@ -2,6 +2,7 @@
 
 const express = require('express');
 const cors = require('cors');
+const rateLimit = require('express-rate-limit');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const Database = require('better-sqlite3');
@@ -49,31 +50,50 @@ if (videoCount === 0) {
   demos.forEach((d) => insert.run(...d));
 }
 
+// ── Rate limiters ─────────────────────────────────────────────────────────────
+// General read API: 300 requests per minute per IP
+const readLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 300,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests, please try again later' },
+});
+
+// Lead submission: 20 per minute per IP (anti-spam)
+const leadSubmitLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many lead submissions, please try again later' },
+});
+
 // ── Middleware ────────────────────────────────────────────────────────────────
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ── API: Videos ───────────────────────────────────────────────────────────────
-app.get('/api/videos', (_req, res) => {
+app.get('/api/videos', readLimiter, (_req, res) => {
   const rows = db.prepare('SELECT * FROM videos ORDER BY created_at DESC').all();
   res.json(rows);
 });
 
-app.get('/api/videos/:id', (req, res) => {
+app.get('/api/videos/:id', readLimiter, (req, res) => {
   const row = db.prepare('SELECT * FROM videos WHERE id = ?').get(req.params.id);
   if (!row) return res.status(404).json({ error: 'Video not found' });
   res.json(row);
 });
 
 // ── API: Leads ────────────────────────────────────────────────────────────────
-app.post('/api/leads', (req, res) => {
+app.post('/api/leads', leadSubmitLimiter, (req, res) => {
   const { video_id, name, email, phone, company, message } = req.body;
 
   if (!name || typeof name !== 'string' || name.trim() === '') {
     return res.status(400).json({ error: 'Name is required' });
   }
-  if (!email || typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+  if (!email || typeof email !== 'string' || !/^[^\s@]+@[^@\s.]+(?:\.[^@\s.]+)+$/.test(email.trim())) {
     return res.status(400).json({ error: 'Valid email is required' });
   }
 
@@ -99,7 +119,7 @@ app.post('/api/leads', (req, res) => {
   res.status(201).json({ id, message: 'Lead captured successfully' });
 });
 
-app.get('/api/leads', (req, res) => {
+app.get('/api/leads', readLimiter, (req, res) => {
   const { video_id } = req.query;
   let query = `
     SELECT l.*, v.title as video_title, v.ip_name
@@ -116,7 +136,7 @@ app.get('/api/leads', (req, res) => {
   res.json(rows);
 });
 
-app.get('/api/leads/export/csv', (req, res) => {
+app.get('/api/leads/export/csv', readLimiter, (req, res) => {
   const rows = db.prepare(`
     SELECT l.id, l.name, l.email, l.phone, l.company, l.message,
            v.title as video_title, v.ip_name, l.created_at
@@ -148,14 +168,14 @@ app.get('/api/leads/export/csv', (req, res) => {
   res.send(lines.join('\r\n'));
 });
 
-app.delete('/api/leads/:id', (req, res) => {
+app.delete('/api/leads/:id', readLimiter, (req, res) => {
   const result = db.prepare('DELETE FROM leads WHERE id = ?').run(req.params.id);
   if (result.changes === 0) return res.status(404).json({ error: 'Lead not found' });
   res.json({ message: 'Lead deleted' });
 });
 
 // ── Stats ─────────────────────────────────────────────────────────────────────
-app.get('/api/stats', (_req, res) => {
+app.get('/api/stats', readLimiter, (_req, res) => {
   const totalLeads   = db.prepare('SELECT COUNT(*) as c FROM leads').get().c;
   const totalVideos  = db.prepare('SELECT COUNT(*) as c FROM videos').get().c;
   const todayLeads   = db.prepare(
@@ -174,7 +194,7 @@ app.get('/api/stats', (_req, res) => {
 });
 
 // ── Fallback: SPA ─────────────────────────────────────────────────────────────
-app.get('/admin', (_req, res) => {
+app.get('/admin', readLimiter, (_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
