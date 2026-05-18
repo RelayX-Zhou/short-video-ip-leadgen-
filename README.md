@@ -1,7 +1,7 @@
 <h1 align="center">short-video-ip-leadgen</h1>
 
 <p align="center">
-  <strong>短视频商业 IP 分析与私域IP原创脚本 Skill</strong>
+  <strong>短视频商业 IP 分析与私域引流原创脚本 Skill</strong>
 </p>
 
 <p align="center">
@@ -32,7 +32,7 @@
 
 `short-video-ip-leadgen` 是一个给 Codex / Claude 使用的短视频商业 IP 分析 Skill。
 
-它用于分析用户提供的抖音、小红书和短视频材料，学习商业博主的视频风格，保存独立记忆，并基于这些记忆生成原创的商业 IP 口播脚本。
+它用于分析用户提供的抖音、小红书和短视频材料，学习商业博主的视频风格，保存独立记忆，并基于这些记忆生成原创的私域商业 IP 口播脚本。
 
 这是一个 **Skill 包**，安装后由 Codex / Claude 直接调用。
 
@@ -84,20 +84,25 @@ short-video-ip-leadgen/
 
 ## 安装到 Codex
 
-把这个仓库克隆到 Codex 的 skills 目录：
-
-```powershell
-cd C:\Users\33162\.codex\skills
-git clone <你的 GitHub 仓库地址> short-video-ip-leadgen
-```
-
-确保存在：
+最简单的方式是把下面这段话直接复制给 Codex：
 
 ```text
-C:\Users\33162\.codex\skills\short-video-ip-leadgen\SKILL.md
+请帮我安装这个 Codex Skill：
+
+Skill 名称：short-video-ip-leadgen
+GitHub 地址：https://github.com/RelayX-Zhou/short-video-ip-leadgen-
+Git 地址：https://github.com/RelayX-Zhou/short-video-ip-leadgen-.git
+
+请下载安装到 Codex 的 skills 目录中，安装完成后检查 SKILL.md 是否存在，并提醒我重启 Codex。
 ```
 
-然后重启 Codex。
+如果你想手动安装，可以使用这个 Git 地址：
+
+```text
+https://github.com/RelayX-Zhou/short-video-ip-leadgen-.git
+```
+
+安装完成后，重启 Codex，让新的 Skill 生效。
 
 ## 使用方式
 
@@ -121,8 +126,8 @@ C:\Users\33162\.codex\skills\short-video-ip-leadgen\SKILL.md
 使用 $short-video-ip-leadgen
 
 我的目标：分析这个商业博主的视频风格，并保存成记忆
-视频路径：D:\a视频解析\下载.mp4
-音频路径：D:\a视频解析\音频.mp4
+视频路径：<你的本地视频路径>
+音频路径：<你的本地音频路径，可选>
 记忆名：商业博主A
 平台：抖音
 ```
@@ -161,7 +166,7 @@ Skill 应提醒：
 当用户提供本地视频路径时，Codex 可以运行：
 
 ```powershell
-python .\scripts\prepare_video_for_agent.py "D:\a视频解析\下载.mp4" --mode standard
+python .\scripts\prepare_video_for_agent.py "<你的本地视频路径>" --mode standard
 ```
 
 脚本会生成：
@@ -275,37 +280,6 @@ memory/商业博主B.json
 拍摄提示：
 ```
 
-## 发布到 GitHub
-
-上传整个仓库即可。最小可用文件是：
-
-```text
-SKILL.md
-agents/openai.yaml
-scripts/prepare_video_for_agent.py
-references/output_templates.md
-memory/.gitkeep
-README.md
-LICENSE
-.gitignore
-```
-
-不要上传运行时记忆文件：
-
-```text
-memory/*.json
-```
-
-不要上传抽帧输出：
-
-```text
-*_codex_frames/
-```
-
-## 开源协议
-
-本项目使用 MIT License 开源。你可以自由使用、修改和分发，但需要保留许可证声明。
-
 ## 典型工作流
 
 1. 用户提供视频、音频、字幕、截图或链接。
@@ -328,3 +302,7 @@ memory/*.json
 然后基于这个记忆，帮我写一条新的抖音口播脚本。
 要求自然陈述，不要明显引流，不要评论区引导。
 ```
+
+## 开源协议
+
+本项目使用 MIT License 开源。你可以自由使用、修改和分发，但需要保留许可证声明。
