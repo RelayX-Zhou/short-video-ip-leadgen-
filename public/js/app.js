@@ -92,7 +92,7 @@ leadForm.addEventListener('submit', async (e) => {
     showError('err-name', '请填写姓名');
     valid = false;
   }
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  if (!email || !/^[^\s@]+@[^@\s.]+(?:\.[^@\s.]+)+$/.test(email)) {
     showError('err-email', '请输入有效的邮箱地址');
     valid = false;
   }
