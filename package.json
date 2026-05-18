@@ -1,0 +1,21 @@
+{
+  "name": "short-video-ip-leadgen",
+  "version": "1.0.0",
+  "description": "Short Video IP Lead Generation Platform — capture and manage leads from short video content campaigns",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node tests/test.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}

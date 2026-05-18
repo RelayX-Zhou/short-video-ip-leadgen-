@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>短视频 IP 获客平台</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <!-- ── Navigation ── -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__logo" href="/">🎬 短视频 IP 获客</a>
+      <nav>
+        <a href="/">首页</a>
+        <a href="/admin.html">管理后台</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <h1 class="hero__title">短视频 IP 获客平台</h1>
+      <p class="hero__sub">精准触达目标客户，让每一条短视频都成为商机入口</p>
+      <a class="btn btn--primary" href="#videos">探索视频内容</a>
+    </div>
+  </section>
+
+  <!-- ── Stats ── -->
+  <section class="stats" id="stats">
+    <div class="container stats__grid">
+      <div class="stat-card">
+        <span class="stat-card__num" id="stat-total-leads">-</span>
+        <span class="stat-card__label">累计线索</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__num" id="stat-today-leads">-</span>
+        <span class="stat-card__label">今日线索</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__num" id="stat-total-videos">-</span>
+        <span class="stat-card__label">内容视频</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card__num" id="stat-top-ip">-</span>
+        <span class="stat-card__label">热门 IP</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Video Grid ── -->
+  <section class="section" id="videos">
+    <div class="container">
+      <h2 class="section__title">热门 IP 内容</h2>
+      <p class="section__sub">观看视频后留下联系方式，获取专属合作方案</p>
+      <div class="video-grid" id="video-grid">
+        <div class="loading">加载中…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Lead Modal ── -->
+  <div class="modal-overlay" id="lead-modal" hidden>
+    <div class="modal">
+      <button class="modal__close" id="modal-close" aria-label="关闭">✕</button>
+      <h3 class="modal__title">留下您的联系方式</h3>
+      <p class="modal__sub">填写后即可获取专属合作方案与更多内容资源</p>
+      <input type="hidden" id="lead-video-id" />
+
+      <form id="lead-form" class="lead-form" novalidate>
+        <div class="form-group">
+          <label for="lead-name">姓名 <span class="required">*</span></label>
+          <input type="text" id="lead-name" name="name" placeholder="您的姓名" required />
+          <span class="field-error" id="err-name"></span>
+        </div>
+        <div class="form-group">
+          <label for="lead-email">邮箱 <span class="required">*</span></label>
+          <input type="email" id="lead-email" name="email" placeholder="your@email.com" required />
+          <span class="field-error" id="err-email"></span>
+        </div>
+        <div class="form-group">
+          <label for="lead-phone">手机号</label>
+          <input type="tel" id="lead-phone" name="phone" placeholder="13xxxxxxxxx" />
+        </div>
+        <div class="form-group">
+          <label for="lead-company">公司 / 品牌</label>
+          <input type="text" id="lead-company" name="company" placeholder="公司或品牌名称" />
+        </div>
+        <div class="form-group">
+          <label for="lead-message">留言</label>
+          <textarea id="lead-message" name="message" rows="3" placeholder="您的需求或问题…"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full" id="lead-submit">提交</button>
+        <p class="form-status" id="form-status"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2024 短视频 IP 获客平台 &nbsp;|&nbsp; 让内容驱动商业增长</p>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

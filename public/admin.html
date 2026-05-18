@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理后台 — 短视频 IP 获客平台</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="admin-body">
+  <!-- ── Navigation ── -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="nav__logo" href="/">🎬 短视频 IP 获客</a>
+      <nav>
+        <a href="/">首页</a>
+        <a href="/admin.html" class="nav__active">管理后台</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="admin-layout container">
+    <!-- ── Stats Row ── -->
+    <section class="stats stats--admin">
+      <div class="stats__grid">
+        <div class="stat-card">
+          <span class="stat-card__num" id="stat-total-leads">-</span>
+          <span class="stat-card__label">累计线索</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num" id="stat-today-leads">-</span>
+          <span class="stat-card__label">今日线索</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num" id="stat-total-videos">-</span>
+          <span class="stat-card__label">视频数量</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__num" id="stat-top-ip">-</span>
+          <span class="stat-card__label">热门 IP</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Leads Table ── -->
+    <section class="admin-section">
+      <div class="admin-section__header">
+        <h2>线索管理</h2>
+        <a class="btn btn--outline" href="/api/leads/export/csv" download="leads.csv">⬇ 导出 CSV</a>
+      </div>
+
+      <div class="filter-bar">
+        <label for="filter-video">按视频筛选：</label>
+        <select id="filter-video">
+          <option value="">全部视频</option>
+        </select>
+        <input type="text" id="filter-search" placeholder="搜索姓名 / 邮箱 / 公司…" />
+      </div>
+
+      <div class="table-wrap">
+        <table class="leads-table" id="leads-table">
+          <thead>
+            <tr>
+              <th>姓名</th>
+              <th>邮箱</th>
+              <th>手机</th>
+              <th>公司 / 品牌</th>
+              <th>来源视频</th>
+              <th>IP 名称</th>
+              <th>留言</th>
+              <th>时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="leads-tbody">
+            <tr><td colspan="9" class="loading">加载中…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2024 短视频 IP 获客平台 &nbsp;|&nbsp; 管理后台</p>
+    </div>
+  </footer>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
